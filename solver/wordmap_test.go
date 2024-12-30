@@ -1,6 +1,9 @@
 package solver
 
-import "testing"
+import (
+	"slices"
+	"testing"
+)
 
 func TestMakeKeyCreatesSet(t *testing.T) {
 	got := makeKey("aabbcc")
@@ -44,5 +47,18 @@ func TestMakeKeySymbolAgnostic(t *testing.T) {
 
 	if got != want {
 		t.Errorf("makeKey(\"There's\") = %s; want %s", got, want)
+	}
+}
+
+func TestWordmapAddingWords(t *testing.T) {
+	wm := NewWordMap()
+	wm.AddWord("Abacus")
+	wm.AddWord("Bacus")
+
+	got := wm.Lookup("abcsu")
+	want := []string{"Abacus", "Bacus"}
+
+	if !slices.Equal(got, want) {
+		t.Errorf("AddWord(\"Abacus\") and AddWord(\"Bacus\")then calling Lookup(\"abcsu\") = %s; want %s", got, want)
 	}
 }

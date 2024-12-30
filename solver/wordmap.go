@@ -39,7 +39,11 @@ func makeKey(word string) string {
 	return string(setSlice)
 }
 
-func (dict wordMap) AddWord(newWord string) {
+func (wm wordMap) AddWord(newWord string) {
 
-	dict.store[makeKey(newWord)] = append(dict.store[makeKey(newWord)], newWord)
+	wm.store[makeKey(newWord)] = append(wm.store[makeKey(newWord)], newWord)
+}
+
+func (wm wordMap) Lookup(letterSet string) []string {
+	return wm.store[letterSet]
 }
