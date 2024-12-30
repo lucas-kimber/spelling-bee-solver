@@ -37,3 +37,12 @@ func TestMakeKeyCapitals(t *testing.T) {
 		t.Errorf("makeKey(\"Aaa\") == makeKey(\"AAa\") = %t; want %t", got, want)
 	}
 }
+
+func TestMakeKeySymbolAgnostic(t *testing.T) {
+	got := makeKey("There's")
+	want := makeKey("Theres")
+
+	if got != want {
+		t.Errorf("makeKey(\"There's\") = %s; want %s", got, want)
+	}
+}

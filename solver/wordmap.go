@@ -3,6 +3,7 @@ package solver
 import (
 	"sort"
 	"strings"
+	"unicode"
 )
 
 type wordMap struct {
@@ -16,23 +17,26 @@ func NewWordMap() *wordMap {
 func makeKey(word string) string {
 
 	word = strings.ToLower(word)
+	setMap := make(map[rune]bool)
 
-	arr := strings.Split(word, "")
-	setMap := make(map[string]bool)
-
-	for _, i := range arr {
+	for _, i := range word {
 		setMap[i] = true
 	}
 
-	setSlice := []string{}
+	setSlice := []rune{}
 
 	for k := range setMap {
-		setSlice = append(setSlice, k)
+
+		if unicode.IsLetter(k) {
+			setSlice = append(setSlice, k)
+		}
 	}
 
-	sort.Strings(setSlice)
+	sort.Slice(setSlice, func(i, j int) bool {
+		return setSlice[i] < setSlice[j]
+	})
 
-	return strings.Join(setSlice, "")
+	return string(setSlice)
 }
 
 func (dict wordMap) AddWord(newWord string) {
