@@ -15,6 +15,8 @@ func NewWordMap() *wordMap {
 
 func makeKey(word string) string {
 
+	word = strings.ToLower(word)
+
 	arr := strings.Split(word, "")
 	setMap := make(map[string]bool)
 

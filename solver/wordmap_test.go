@@ -28,3 +28,12 @@ func TestMakeKeyEquality(t *testing.T) {
 		t.Errorf("makeKey(\"aaccbb\") == makeKey(\"bbbbccccaa\") = %t; want %t", got, want)
 	}
 }
+
+func TestMakeKeyCapitals(t *testing.T) {
+	got := makeKey("Ab") == makeKey("Ba")
+	want := true
+
+	if got != want {
+		t.Errorf("makeKey(\"Aaa\") == makeKey(\"AAa\") = %t; want %t", got, want)
+	}
+}
