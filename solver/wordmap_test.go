@@ -25,6 +25,6 @@ func TestMakeKeyEquality(t *testing.T) {
 	want := true
 
 	if got != want {
-		t.Errorf("makeKey(\"aaccbb\") == makeKey(\"bbbbccccaa\") = %b; want %b", got, want)
+		t.Errorf("makeKey(\"aaccbb\") == makeKey(\"bbbbccccaa\") = %t; want %t", got, want)
 	}
 }

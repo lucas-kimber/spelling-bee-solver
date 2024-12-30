@@ -28,7 +28,9 @@ func makeKey(word string) string {
 		setSlice = append(setSlice, k)
 	}
 
-	return strings.Join(sort.StringSlice(setSlice), "")
+	sort.Strings(setSlice)
+
+	return strings.Join(setSlice, "")
 }
 
 func (dict wordMap) AddWord(newWord string) {
