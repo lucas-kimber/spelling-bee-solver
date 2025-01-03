@@ -1,6 +1,7 @@
 package solver
 
 import (
+	"sort"
 	"strings"
 )
 
@@ -19,19 +20,37 @@ func (s solver) ParseWords(words []string) {
 	}
 }
 
-func findSubsets(letterSet string) []string {
+func findSubsets(s string) []string {
 
-	arr := strings.Split(letterSet, "")
-	sol := []string{}
+	n := len(s)
+	subsets := []string{}
 
-	for y := 2; y < len(arr); y++ {
-		for x := 0; x+y < len(arr); x++ {
-			subStr := arr[x : x+y+1]
-			sol = append(sol, strings.Join(subStr, ""))
+	for i := 1; i < (1 << n); i++ {
+
+		var subset string
+
+		for j := 0; j < n; j++ {
+
+			if (i & (1 << j)) != 0 {
+
+				subset += string(s[j])
+			}
 		}
+
+		subsets = append(subsets, subset)
 	}
 
-	return sol
+	return subsets
+}
+
+func insertInOrder(c string, str string) string {
+
+	str += c
+	sortedStr := strings.Split(str, "")
+
+	sort.Strings(sortedStr)
+
+	return strings.Join(sortedStr, "")
 }
 
 func (s solver) Solve(centreLetter string, inputLetters string) []string {
@@ -54,7 +73,7 @@ func (s solver) Solve(centreLetter string, inputLetters string) []string {
 	solutionSet := []string{}
 
 	for _, i := range subsets {
-		solutionSet = append(solutionSet, s.dictionary.Lookup(i)...)
+		solutionSet = append(solutionSet, s.dictionary.Lookup(insertInOrder(centreLetter, i))...)
 	}
 
 	return solutionSet

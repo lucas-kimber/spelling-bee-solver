@@ -5,12 +5,21 @@ import (
 	"testing"
 )
 
+func TestInsertInOrder(t *testing.T) {
+	got := insertInOrder("a", "bc")
+	want := "abc"
+
+	if got != want {
+		t.Errorf("insertInOrder(\"a\", \"bc\") = %s; want %s", got, want)
+	}
+}
+
 func TestFindSubsets(t *testing.T) {
-	got := findSubsets("abcdef")
-	want := []string{"abc", "bcd", "cde", "def", "abcd", "bcde", "cdef", "abcde", "bcdef", "abcdef"}
+	got := findSubsets("abc")
+	want := []string{"a", "b", "ab", "c", "ac", "bc", "abc"}
 
 	if !slices.Equal(got, want) {
-		t.Errorf("findSubsets(\"abcdef\") = %s; want %s", got, want)
+		t.Errorf("findSubsets(\"abc\") = %s; want %s", got, want)
 	}
 }
 
@@ -43,10 +52,10 @@ func TestSolveRejectsWithoutCentreLetter(t *testing.T) {
 func TestSolveSubsets(t *testing.T) {
 
 	s := NewSolver()
-	s.ParseWords([]string{"abcc", "abccdd", "aaaa"})
+	s.ParseWords([]string{"abcc", "abccdd", "abba", "defg"})
 
-	got := s.Solve("a", "abcdef")
-	want := []string{"abcc", "abccdd", "aaaa"}
+	got := s.Solve("a", "bcdefg")
+	want := []string{"abba", "abcc", "abccdd"}
 
 	if !slices.Equal(got, want) {
 		t.Errorf("ParseWords([]string{\"abcc\", \"abccdd\", \"aaaa\"}) then Solve(\"a\", \"abcdef\") = %s; want %s", got, want)
