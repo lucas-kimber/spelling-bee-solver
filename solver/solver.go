@@ -15,11 +15,14 @@ func NewSolver() *solver {
 	return &solver{*NewWordMap()}
 }
 
-// ParseWords takes a slice of strings and adds them to the wordMap
+// ParseWords takes a slice of strings and adds them to the wordMap if they are longer than three letters.
 func (s solver) ParseWords(words []string) {
 
 	for _, w := range words {
-		s.dictionary.AddWord(w)
+
+		if len(w) > 3 {
+			s.dictionary.AddWord(w)
+		}
 	}
 }
 
