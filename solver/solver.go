@@ -19,13 +19,28 @@ func NewSolver() *solver {
 // ParseWords takes a slice of strings and adds them to the wordMap if they are longer than three letters.
 func (s solver) ParseWords(words []string) {
 
-	for _, w := range words {
+	sort.Slice(words, func(i, j int) bool {
+		return words[i] < words[j]
+	})
+
+	for i, w := range words {
+
+		if i > 0 && w == words[i-1] {
+			continue
+		}
+
+		foundInvalid := false
 
 		for _, r := range w {
 
 			if !unicode.IsLetter(r) {
+				foundInvalid = true
 				continue
 			}
+		}
+
+		if foundInvalid {
+			continue
 		}
 
 		if len(w) > 3 {
@@ -98,6 +113,10 @@ func (s solver) Solve(centreLetter string, inputLetters string) []string {
 	for _, i := range subsets {
 		solutionSet = append(solutionSet, s.dictionary.Lookup(insertInOrder(centreLetter, i))...)
 	}
+
+	sort.Slice(solutionSet, func(i, j int) bool {
+		return solutionSet[i] < solutionSet[j]
+	})
 
 	return solutionSet
 }
