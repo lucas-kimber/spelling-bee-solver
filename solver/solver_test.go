@@ -29,7 +29,7 @@ func TestSolve(t *testing.T) {
 	s.ParseWords([]string{"abcd", "bcad", "bacd", "xyzd"})
 
 	got := s.Solve("a", "bcdefg")
-	want := []string{"abcd", "bcad", "bacd"}
+	want := []string{"abcd", "bacd", "bcad"}
 
 	if !slices.Equal(got, want) {
 		t.Errorf("ParseWords([]string{\"abcd\", \"bcad\", \"bacd\", \"xyzd\"}) then Solve(\"a\", \"abcdefg\") = %s; want %s", got, want)
