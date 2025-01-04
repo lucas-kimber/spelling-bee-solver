@@ -3,6 +3,7 @@ package solver
 import (
 	"sort"
 	"strings"
+	"unicode"
 )
 
 // solver wraps a wordMap and is used to implement functionality for actually solving SpellingBee given a problem set.
@@ -20,7 +21,15 @@ func (s solver) ParseWords(words []string) {
 
 	for _, w := range words {
 
+		for _, r := range w {
+
+			if !unicode.IsLetter(r) {
+				continue
+			}
+		}
+
 		if len(w) > 3 {
+
 			s.dictionary.AddWord(w)
 		}
 	}
