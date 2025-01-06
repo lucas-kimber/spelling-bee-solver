@@ -96,14 +96,12 @@ func (s solver) Solve(centreLetter string, inputLetters string) []string {
 	letterSet := ""
 	arr := strings.Split(inputLetters, "")
 
-	// Ensure the centre letter isn't in the input letters
 	for _, l := range arr {
 		if centreLetter != l {
 			letterSet += l
 		}
 	}
 
-	// Ensures it's correctly formed
 	letterSet = makeKey(letterSet)
 
 	subsets := findSubsets(letterSet)
