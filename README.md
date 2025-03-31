@@ -32,17 +32,17 @@ The solver package includes the actual code for the data structure, which is the
 
 A code example of how these are used: 
 ``` Go
-    // Read the dictionary into a slice
-    words, err := dictionary.ParseJSON("dictionary/dictionary.json")
+	// Read the dictionary into a slice
+	words, err := dictionary.ParseJSON("dictionary/dictionary.json")
 
 	if err != nil {
 		panic(err)
 	}
 
-    // Initialise a input the wordlist into a new solver
+	// Initialise a input the wordlist into a new solver
 	s := solver.NewSolver()
 	s.ParseWords(words)
 
-    // Generate the solution set
+	// Generate the solution set
 	sol := s.Solve("i", "adehlp")
 ```
