@@ -6,18 +6,18 @@ import (
 	"unicode"
 )
 
-// solver wraps a wordMap and is used to implement functionality for actually solving SpellingBee given a problem set.
-type solver struct {
-	dictionary wordMap
+// Solver wraps a WordMap and is used to implement functionality for actually solving SpellingBee given a problem set.
+type Solver struct {
+	dictionary WordMap
 }
 
-// NewSolver constructs a solver with an initialised wordMap
-func NewSolver() *solver {
-	return &solver{*NewWordMap()}
+// NewSolver constructs a Solver with an initialised WordMap
+func NewSolver() *Solver {
+	return &Solver{*NewWordMap()}
 }
 
-// ParseWords takes a slice of strings and adds them to the wordMap if they are longer than three letters.
-func (s solver) ParseWords(words []string) {
+// ParseWords takes a slice of strings and adds them to the WordMap if they are longer than three letters.
+func (s Solver) ParseWords(words []string) {
 
 	sort.Slice(words, func(i, j int) bool {
 		return words[i] < words[j]
@@ -89,9 +89,9 @@ func insertInOrder(c string, str string) string {
 // The problem set is given as:
 // centreLetter, the letter that must be present in all solution words
 // inputLetters, the set of letters that can be used to make words
-// It then finds all unique permutations of inputLetters, adds the centreLetter, and looks up the words that can be made from these permutations in the wordMap.
+// It then finds all unique permutations of inputLetters, adds the centreLetter, and looks up the words that can be made from these permutations in the WordMap.
 // The return is a string slice which is the uninion of all the lookups.
-func (s solver) Solve(centreLetter string, inputLetters string) []string {
+func (s Solver) Solve(centreLetter string, inputLetters string) []string {
 
 	letterSet := ""
 	arr := strings.Split(inputLetters, "")
